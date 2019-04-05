@@ -1,6 +1,6 @@
 <?php
 
-namespace Sbine\RouteViewer;
+namespace EagleDevelopers\NovaRouteViewer;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;

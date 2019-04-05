@@ -1,8 +1,8 @@
 <?php
 
-namespace Sbine\RouteViewer\Http\Middleware;
+namespace EagleDevelopers\NovaRouteViewer\Http\Middleware;
 
-use Sbine\RouteViewer\RouteViewer;
+use EagleDevelopers\NovaRouteViewer\RouteViewer;
 
 class Authorize
 {

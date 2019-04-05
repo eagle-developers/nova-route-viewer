@@ -1,6 +1,6 @@
 <?php
 
-namespace Sbine\RouteViewer\Http\Controllers;
+namespace EagleDevelopers\NovaRouteViewer\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 

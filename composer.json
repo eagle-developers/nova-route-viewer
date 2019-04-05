@@ -1,17 +1,23 @@
 {
-    "name": "sbine/route-viewer",
+    "name": "eagle-developers/nova-route-viewer",
     "description": "A Laravel Nova tool to view your registered routes.",
     "keywords": [
         "laravel",
         "nova",
         "routes"
     ],
-    "homepage": "https://github.com/sbine/nova-route-viewer",
+    "homepage": "https://github.com/eagle-developers/nova-route-viewer",
     "license": "MIT",
     "authors": [
         {
+            "name": "Eagle Metal Products Web Developers",
+            "email": "webdev@eaglemetal.com",
+            "homepage": "https://github.com/eagle-developers",
+            "role": "Fork Developers"
+        },
+        {
             "name": "Sara Bine",
-            "role": "Developer"
+            "role": "Original Developer"
         }
     ],
     "require": {
@@ -20,13 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Sbine\\RouteViewer\\": "src/"
+            "EagleDevelopers\\NovaRouteViewer\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Sbine\\RouteViewer\\ToolServiceProvider"
+                "EagleDevelopers\\NovaRouteViewer\\ToolServiceProvider"
             ]
         }
     },

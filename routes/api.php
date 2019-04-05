@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/routes', 'Sbine\RouteViewer\Http\Controllers\Api@getRoutes');
+Route::get('/routes', 'EagleDevelopers\NovaRouteViewer\Http\Controllers\Api@getRoutes');

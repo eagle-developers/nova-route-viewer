@@ -14,13 +14,13 @@
             </div>
 
             <div class="flex items-center mb-6 ml-6">
-                <checkbox :checked="showNova"
-                          @input="toggleNova"
+                <checkbox :checked="showHidden"
+                          @input="toggleHidden"
                 />
                 <label class="cursor-pointer pl-2"
-                       @click="toggleNova"
+                       @click="toggleHidden"
                 >
-                    Show Nova routes
+                    Show hidden paths
                 </label>
             </div>
 
@@ -46,35 +46,43 @@ import RouteTable from './RouteTable';
 
 export default {
     components: { RouteTable },
+
     data() {
         return {
             routes: [],
+            hidden: [],
             search: '',
             sort: {
                 field: '',
                 order: -1,
             },
-            showNova: false,
+            showHidden: false,
         }
     },
+
     mounted() {
         this.getRoutes();
     },
+
     methods: {
         getRoutes() {
-            Nova.request().get('/nova-vendor/route-viewer/routes').then(response => {
-                this.routes = response.data;
+            Nova.request().get('/nova-vendor/eagle-developers/nova-route-viewer/routes').then(response => {
+                this.routes = response.data.routes;
+                this.hidden = response.data.hidden;
             });
         },
+
         sortBy(field) {
             this.sort.field = field;
             this.sort.order *= -1;
 
             this.routes.sort((route1, route2) => {
                 let comparison = 0;
+
                 if (route1[this.sort.field] < route2[this.sort.field]) {
                     comparison = -1;
                 }
+
                 if (route1[this.sort.field] > route2[this.sort.field]) {
                     comparison = 1;
                 }
@@ -82,10 +90,12 @@ export default {
                 return comparison * this.sort.order;
             });
         },
-        toggleNova() {
-            this.showNova = ! this.showNova;
+
+        toggleHidden() {
+            this.showHidden = ! this.showHidden;
         }
     },
+
     computed: {
         filteredRoutes() {
             if (! this.search.length) {
@@ -117,20 +127,28 @@ export default {
                 return matchesSearch;
             });
         },
+
         visibleRoutes() {
-            if (this.showNova) {
+            if (this.showHidden) {
                 return this.routes;
             }
 
             return this.routes.filter(route => {
-                return (! route.action.length || route.action.indexOf('Laravel\\Nova') !== 0)
-                    && (! route.as.length || route.as.indexOf('nova') !== 0)
-                    && ! route.middleware.includes('nova');
+                let keep = true;
+
+                for (let i in this.hidden) {
+                    if (route.uri.indexOf(this.hidden[i]) === 0) {
+                        keep = false;
+                    }
+                }
+
+                return keep
             });
         },
+
         searchRegex() {
             try {
-                return new RegExp('(' + this.search + ')','i');
+                return new RegExp('(' + this.search + ')', 'i');
             } catch (e) {
                 return false;
             }

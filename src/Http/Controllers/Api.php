@@ -15,11 +15,13 @@ class Api
     {
         $routes = collect(Route::getRoutes())->map(function ($route, $index) {
             $routeName = $route->action['as'] ?? '';
+
             if (ends_with($routeName, '.')) {
                 $routeName = '';
             }
 
             $routeMiddleware = $route->action['middleware'] ?? [];
+
             if (! is_array($routeMiddleware)) {
                 $routeMiddleware = [$routeMiddleware];
             }
@@ -33,6 +35,9 @@ class Api
             ];
         });
 
-        return response()->json($routes);
+        return response()->json([
+            'routes' => $routes,
+            'hidden' => config('nova-route-viewer.hidden'),
+        ]);
     }
 }

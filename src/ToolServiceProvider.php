@@ -40,8 +40,8 @@ class ToolServiceProvider extends ServiceProvider
         }
 
         Route::middleware(['nova', Authorize::class])
-                ->prefix('nova-vendor/route-viewer')
-                ->group(__DIR__.'/../routes/api.php');
+                ->prefix('nova-vendor/eagle-developers/nova-route-viewer')
+                ->group(__DIR__. '/../routes/api.php');
     }
 
     /**
@@ -51,6 +51,12 @@ class ToolServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/nova-route-viewer.php', 'nova-route-viewer'
+        );
+
+        $this->publishes([
+            __DIR__.'/../config/nova-route-viewer.php' => config_path('nova-route-viewer.php'),
+        ], 'nova-route-viewer-config');
     }
 }

@@ -23,11 +23,27 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel/nova": "*"
+        "illuminate/support": "^5.8",
+        "laravel/nova": "^2.0"
     },
+    "require-dev": {
+        "orchestra/testbench": "^3.8",
+        "phpunit/phpunit": "8.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "EagleDevelopers\\NovaRouteViewer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EagleDevelopers\\NovaRouteViewer\\Tests\\": "tests"
         }
     },
     "extra": {
@@ -36,6 +52,9 @@
                 "EagleDevelopers\\NovaRouteViewer\\ToolServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     },
     "config": {
         "sort-packages": true

@@ -26,6 +26,10 @@ class ToolServiceProvider extends ServiceProvider
         Nova::serving(function (ServingNova $event) {
             //
         });
+
+        $this->publishes([
+            __DIR__.'/../config/nova-route-viewer.php' => config_path('nova-route-viewer.php'),
+        ], 'nova-config');
     }
 
     /**
@@ -54,9 +58,5 @@ class ToolServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/nova-route-viewer.php', 'nova-route-viewer'
         );
-
-        $this->publishes([
-            __DIR__.'/../config/nova-route-viewer.php' => config_path('nova-route-viewer.php'),
-        ], 'nova-route-viewer-config');
     }
 }
